@@ -372,6 +372,9 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     if (scrollingDirection == _ScrollingDirectionUnknown) {
         return;
     }
+
+    // Prevent NSInternalInconsistencyException  'layout attributes for supplementary item at index path ... without invalidating the layout' when adding layout attributes in layoutAttributesForElementsInRect, e.g. for decoration views.
+    [self.collectionView.collectionViewLayout invalidateLayout];
     
     CGSize frameSize = self.collectionView.bounds.size;
     CGSize contentSize = self.collectionView.contentSize;
