@@ -12,8 +12,8 @@
 
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView layoutHelper:(LSCollectionViewLayoutHelper*)layoutHelper;
 
-@property (nonatomic, assign) UIEdgeInsets      scrollingEdgeInsets;
-@property (nonatomic, assign) CGFloat           scrollingSpeed;
-@property (nonatomic, assign) BOOL              enabled;
-
+@property (nonatomic, assign)               UIEdgeInsets                    scrollingEdgeInsets;
+@property (nonatomic, assign)               CGFloat                         scrollingSpeed;
+@property (nonatomic, assign)               BOOL                            enabled;
+@property (nonatomic, strong, readonly)     UILongPressGestureRecognizer    *longPressGestureRecognizer;
 @end
