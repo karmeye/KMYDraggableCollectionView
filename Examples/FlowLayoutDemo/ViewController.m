@@ -7,13 +7,21 @@
 #import "ViewController.h"
 #import "Cell.h"
 
+#import "KMYCollectionViewDraggingCoordinator.h"
+#import "LSCollectionViewLayoutHelper.h"
+#import "KMYDraggableCollectionViewLayout.h"
+#import "KMYDraggableCollectionViewDataSource.h"
+
 #define SECTION_COUNT 5
 #define ITEM_COUNT 20
 
-@interface ViewController ()
+@interface ViewController ()  <KMYDraggableCollectionViewDataSource, UICollectionViewDelegate>
 {
     NSMutableArray *sections;
 }
+
+@property (nonatomic, strong)                   KMYCollectionViewDraggingCoordinator        *draggingCoordinator;
+
 @end
 
 @implementation ViewController
@@ -21,6 +29,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    LSCollectionViewLayoutHelper *layoutHelper      = [[LSCollectionViewLayoutHelper alloc] initWithCollectionViewLayout:self.collectionView.collectionViewLayout];
+
+    ((KMYDraggableCollectionViewLayout*)self.collectionView.collectionViewLayout).layoutModifiers = @[layoutHelper];
+
+    self.draggingCoordinator                        = [[KMYCollectionViewDraggingCoordinator alloc] initWithCollectionView:self.collectionView layoutHelper:layoutHelper];
+
+    self.draggingCoordinator.enabled                = YES;
+    self.draggingCoordinator.scrollingEdgeInsets    = UIEdgeInsetsMake(100.0f, 100.0f, 100.0f, 100.0f);
+    self.draggingCoordinator.scrollingSpeed         = 600;
     
     sections = [[NSMutableArray alloc] initWithCapacity:ITEM_COUNT];
     for(int s = 0; s < SECTION_COUNT; s++) {
@@ -52,7 +70,7 @@
     return cell;
 }
 
-- (BOOL)collectionView:(LSCollectionViewHelper *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)collectionView:(UICollectionView*)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
 }
@@ -66,7 +84,7 @@
     return YES;
 }
 
-- (void)collectionView:(LSCollectionViewHelper *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     NSMutableArray *data1 = [sections objectAtIndex:fromIndexPath.section];
     NSMutableArray *data2 = [sections objectAtIndex:toIndexPath.section];

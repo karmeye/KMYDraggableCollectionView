@@ -12,21 +12,25 @@
 
 @implementation LSCollectionViewLayoutHelper
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout<UICollectionViewLayout_Warpable>*)collectionViewLayout
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout
 {
     self = [super init];
+
     if (self) {
-        _collectionViewLayout = collectionViewLayout;
+        self.collectionViewLayout = collectionViewLayout;
     }
+    
     return self;
 }
 
 - (NSArray *)modifiedLayoutAttributesForElements:(NSArray *)elements
 {
-    UICollectionView *collectionView = self.collectionViewLayout.collectionView;
-    NSIndexPath *fromIndexPath = self.fromIndexPath;
-    NSIndexPath *toIndexPath = self.toIndexPath;
-    NSIndexPath *hideIndexPath = self.hideIndexPath;
+    NSParameterAssert(self.collectionViewLayout && self.collectionViewLayout.collectionView);
+
+    UICollectionView *collectionView    = self.collectionViewLayout.collectionView;
+    NSIndexPath *fromIndexPath          = self.fromIndexPath;
+    NSIndexPath *toIndexPath            = self.toIndexPath;
+    NSIndexPath *hideIndexPath          = self.hideIndexPath;
     NSIndexPath *indexPathToRemove;
     
     if (toIndexPath == nil) {

@@ -5,16 +5,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UICollectionViewLayout_Warpable.h"
+#import "KMYCollectionViewLayoutModifier.h"
 
-@interface LSCollectionViewLayoutHelper : NSObject
+@interface LSCollectionViewLayoutHelper : NSObject <KMYCollectionViewLayoutModifier>
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout<UICollectionViewLayout_Warpable>*)collectionViewLayout;
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout;
 
-- (NSArray *)modifiedLayoutAttributesForElements:(NSArray *)elements;
+@property (nonatomic, weak  )   UICollectionViewLayout *collectionViewLayout;
 
-@property (nonatomic, weak, readonly) UICollectionViewLayout<UICollectionViewLayout_Warpable> *collectionViewLayout;
-@property (strong, nonatomic) NSIndexPath *fromIndexPath;
-@property (strong, nonatomic) NSIndexPath *toIndexPath;
-@property (strong, nonatomic) NSIndexPath *hideIndexPath;
+@property (nonatomic, strong)   NSIndexPath *fromIndexPath;
+@property (nonatomic, strong)   NSIndexPath *toIndexPath;
+@property (nonatomic, strong)   NSIndexPath *hideIndexPath;
+
 @end
