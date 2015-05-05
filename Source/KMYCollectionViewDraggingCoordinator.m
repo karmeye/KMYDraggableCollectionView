@@ -180,7 +180,6 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
 - (void)warpToIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@, %@", indexPath, lastIndexPath);
     if(indexPath == nil || [lastIndexPath isEqual:indexPath]) {
         return;
     }
