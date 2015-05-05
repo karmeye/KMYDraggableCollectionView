@@ -48,19 +48,12 @@
 		8E947CD41754598E0077D957 /* Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		8E947CD51754598E0077D957 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		8E955E871793ADF5008F72D9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A602C4DA1AF9049300CB7A51 /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		A602C4DB1AF9049300CB7A51 /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		A602C4DC1AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYCollectionViewDraggingCoordinator.h; sourceTree = "<group>"; };
 		A602C4DD1AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYCollectionViewDraggingCoordinator.m; sourceTree = "<group>"; };
 		A602C4DE1AF9049300CB7A51 /* KMYCollectionViewLayoutModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYCollectionViewLayoutModifier.h; sourceTree = "<group>"; };
 		A602C4DF1AF9049300CB7A51 /* KMYDraggableCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionViewDataSource.h; sourceTree = "<group>"; };
-		A602C4E01AF9049300CB7A51 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
-		A602C4E11AF9049300CB7A51 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
 		A602C4E21AF9049300CB7A51 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
 		A602C4E31AF9049300CB7A51 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
-		A602C4E41AF9049300CB7A51 /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
-		A602C4E51AF9049300CB7A51 /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
-		A602C4E61AF9049300CB7A51 /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
 		A602C4EC1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionViewLayout.h; sourceTree = "<group>"; };
 		A602C4ED1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYDraggableCollectionViewLayout.m; sourceTree = "<group>"; };
 		A602C4F01AF9137B00CB7A51 /* KMYDraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
@@ -144,7 +137,6 @@
 		A602C4D91AF9049300CB7A51 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				A602C4EF1AF9081D00CB7A51 /* Del */,
 				A602C4DC1AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.h */,
 				A602C4DD1AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.m */,
 				A602C4E21AF9049300CB7A51 /* LSCollectionViewLayoutHelper.h */,
@@ -158,20 +150,6 @@
 			);
 			name = Source;
 			path = ../Source;
-			sourceTree = "<group>";
-		};
-		A602C4EF1AF9081D00CB7A51 /* Del */ = {
-			isa = PBXGroup;
-			children = (
-				A602C4DA1AF9049300CB7A51 /* DraggableCollectionViewFlowLayout.h */,
-				A602C4DB1AF9049300CB7A51 /* DraggableCollectionViewFlowLayout.m */,
-				A602C4E01AF9049300CB7A51 /* LSCollectionViewHelper.h */,
-				A602C4E11AF9049300CB7A51 /* LSCollectionViewHelper.m */,
-				A602C4E41AF9049300CB7A51 /* UICollectionView+Draggable.h */,
-				A602C4E51AF9049300CB7A51 /* UICollectionView+Draggable.m */,
-				A602C4E61AF9049300CB7A51 /* UICollectionViewLayout_Warpable.h */,
-			);
-			name = Del;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
