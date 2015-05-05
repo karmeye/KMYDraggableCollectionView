@@ -44,8 +44,6 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 @property (nonatomic, strong, readonly)     UIGestureRecognizer             *longPressGestureRecognizer;
 @property (nonatomic, strong, readonly) 	UIGestureRecognizer             *panPressGestureRecognizer;
 
-
-
 @end
 
 #pragma mark -
@@ -70,19 +68,17 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
         _scrollingEdgeInsets = UIEdgeInsetsMake(50.0f, 50.0f, 50.0f, 50.0f);
         _scrollingSpeed = 300.f;
 
-        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]
-                                       initWithTarget:self
-                                       action:@selector(handleLongPressGesture:)];
+        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
         [_collectionView addGestureRecognizer:_longPressGestureRecognizer];
 
-        _panPressGestureRecognizer = [[UIPanGestureRecognizer alloc]
-                                      initWithTarget:self action:@selector(handlePanGesture:)];
+        _panPressGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
         _panPressGestureRecognizer.delegate = self;
-
         [_collectionView addGestureRecognizer:_panPressGestureRecognizer];
 
-        for (UIGestureRecognizer *gestureRecognizer in _collectionView.gestureRecognizers) {
-            if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
+        for (UIGestureRecognizer *gestureRecognizer in _collectionView.gestureRecognizers)
+        {
+            if (gestureRecognizer != _longPressGestureRecognizer && [gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]])
+            {
                 [gestureRecognizer requireGestureRecognizerToFail:_longPressGestureRecognizer];
                 break;
             }
