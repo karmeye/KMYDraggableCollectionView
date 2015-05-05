@@ -1,14 +1,13 @@
 //
-//  Copyright (c) 2013 Luke Scott
-//  https://github.com/lukescott/DraggableCollectionView
+//  Copyright (c) 2015 Karmeye
+//  https://github.com/karmeye/KMYDraggableCollectionView
 //  Distributed under MIT license
 //
 
 #import <Foundation/Foundation.h>
 
-@class LSCollectionViewHelper;
+@protocol KMYDraggableCollectionViewDataSource <UICollectionViewDataSource>
 
-@protocol UICollectionViewDataSource_Draggable <UICollectionViewDataSource>
 @required
 
 - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath;

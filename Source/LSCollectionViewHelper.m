@@ -6,7 +6,7 @@
 
 #import "LSCollectionViewHelper.h"
 #import "UICollectionViewLayout_Warpable.h"
-#import "UICollectionViewDataSource_Draggable.h"
+#import "KMYDraggableCollectionViewDataSource.h"
 #import "LSCollectionViewLayoutHelper.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -214,7 +214,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     if (sender.state == UIGestureRecognizerStateChanged) {
         return;
     }
-    if (![self.collectionView.dataSource conformsToProtocol:@protocol(UICollectionViewDataSource_Draggable)]) {
+    if (![self.collectionView.dataSource conformsToProtocol:@protocol(KMYDraggableCollectionViewDataSource)]) {
         return;
     }
     
@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             if (indexPath == nil) {
                 return;
             }
-            if (![(id<UICollectionViewDataSource_Draggable>)self.collectionView.dataSource
+            if (![(id<KMYDraggableCollectionViewDataSource>)self.collectionView.dataSource
                   collectionView:self.collectionView
                   canMoveItemAtIndexPath:indexPath]) {
                 return;
@@ -261,7 +261,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             NSIndexPath *fromIndexPath = self.layoutHelper.fromIndexPath;
             NSIndexPath *toIndexPath = self.layoutHelper.toIndexPath;
             // Tell the data source to move the item
-            id<UICollectionViewDataSource_Draggable> dataSource = (id<UICollectionViewDataSource_Draggable>)self.collectionView.dataSource;
+            id<KMYDraggableCollectionViewDataSource> dataSource = (id<KMYDraggableCollectionViewDataSource>)self.collectionView.dataSource;
             [dataSource collectionView:self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
            
             // Move the item
@@ -308,7 +308,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     lastIndexPath = indexPath;
     
     if ([self.collectionView.dataSource respondsToSelector:@selector(collectionView:canMoveItemAtIndexPath:toIndexPath:)] == YES
-        && [(id<UICollectionViewDataSource_Draggable>)self.collectionView.dataSource
+        && [(id<KMYDraggableCollectionViewDataSource>)self.collectionView.dataSource
             collectionView:self.collectionView
             canMoveItemAtIndexPath:self.layoutHelper.fromIndexPath
             toIndexPath:indexPath] == NO) {
