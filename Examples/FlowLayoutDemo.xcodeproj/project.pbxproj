@@ -19,12 +19,12 @@
 		8E947CB7175458980077D957 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E947CB6175458980077D957 /* Default@2x.png */; };
 		8E947CB9175458980077D957 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E947CB8175458980077D957 /* Default-568h@2x.png */; };
 		8E947CC2175458980077D957 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947CC1175458980077D957 /* ViewController.m */; };
-		8E947CD31754593B0077D957 /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947CCE1754593B0077D957 /* UICollectionView+Draggable.m */; };
 		8E947CD817545AF10077D957 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947CD51754598E0077D957 /* Cell.m */; };
-		8E947CDC17545C100077D957 /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947CDB17545C100077D957 /* DraggableCollectionViewFlowLayout.m */; };
-		8E947CE217545C370077D957 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947CDF17545C370077D957 /* LSCollectionViewHelper.m */; };
-		8E947CE317545C370077D957 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947CE117545C370077D957 /* LSCollectionViewLayoutHelper.m */; };
 		8E955E881793ADF5008F72D9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E955E871793ADF5008F72D9 /* QuartzCore.framework */; };
+		A602C4C61AF8A0B500CB7A51 /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4BD1AF8A0B500CB7A51 /* DraggableCollectionViewFlowLayout.m */; };
+		A602C4C71AF8A0B500CB7A51 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4BF1AF8A0B500CB7A51 /* LSCollectionViewHelper.m */; };
+		A602C4C81AF8A0B500CB7A51 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4C11AF8A0B500CB7A51 /* LSCollectionViewLayoutHelper.m */; };
+		A602C4C91AF8A0B500CB7A51 /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4C31AF8A0B500CB7A51 /* UICollectionView+Draggable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,19 +45,19 @@
 		8E947CB8175458980077D957 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8E947CC0175458980077D957 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8E947CC1175458980077D957 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		8E947CCD1754593B0077D957 /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
-		8E947CCE1754593B0077D957 /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
-		8E947CCF1754593B0077D957 /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
-		8E947CD01754593B0077D957 /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
 		8E947CD41754598E0077D957 /* Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		8E947CD51754598E0077D957 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
-		8E947CDA17545C100077D957 /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		8E947CDB17545C100077D957 /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		8E947CDE17545C370077D957 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
-		8E947CDF17545C370077D957 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
-		8E947CE017545C370077D957 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
-		8E947CE117545C370077D957 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
 		8E955E871793ADF5008F72D9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A602C4BC1AF8A0B500CB7A51 /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		A602C4BD1AF8A0B500CB7A51 /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		A602C4BE1AF8A0B500CB7A51 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
+		A602C4BF1AF8A0B500CB7A51 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
+		A602C4C01AF8A0B500CB7A51 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
+		A602C4C11AF8A0B500CB7A51 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
+		A602C4C21AF8A0B500CB7A51 /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
+		A602C4C31AF8A0B500CB7A51 /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
+		A602C4C41AF8A0B500CB7A51 /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
+		A602C4C51AF8A0B500CB7A51 /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				8E947CA8175458980077D957 /* FlowLayoutDemo */,
+				A602C4BB1AF8A0B500CB7A51 /* Source */,
 				8E947CA1175458980077D957 /* Frameworks */,
 				8E947CA0175458980077D957 /* Products */,
 			);
@@ -114,7 +115,6 @@
 				8E947CC1175458980077D957 /* ViewController.m */,
 				8E947CD41754598E0077D957 /* Cell.h */,
 				8E947CD51754598E0077D957 /* Cell.m */,
-				8E947CC81754593B0077D957 /* DraggableCollectionView */,
 				8E947CA9175458980077D957 /* Supporting Files */,
 			);
 			path = FlowLayoutDemo;
@@ -134,37 +134,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8E947CC81754593B0077D957 /* DraggableCollectionView */ = {
+		A602C4BB1AF8A0B500CB7A51 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				8E947CDD17545C370077D957 /* Helpers */,
-				8E947CD917545C100077D957 /* Layout */,
-				8E947CCD1754593B0077D957 /* UICollectionView+Draggable.h */,
-				8E947CCE1754593B0077D957 /* UICollectionView+Draggable.m */,
-				8E947CCF1754593B0077D957 /* UICollectionViewDataSource_Draggable.h */,
-				8E947CD01754593B0077D957 /* UICollectionViewLayout_Warpable.h */,
+				A602C4BC1AF8A0B500CB7A51 /* DraggableCollectionViewFlowLayout.h */,
+				A602C4BD1AF8A0B500CB7A51 /* DraggableCollectionViewFlowLayout.m */,
+				A602C4BE1AF8A0B500CB7A51 /* LSCollectionViewHelper.h */,
+				A602C4BF1AF8A0B500CB7A51 /* LSCollectionViewHelper.m */,
+				A602C4C01AF8A0B500CB7A51 /* LSCollectionViewLayoutHelper.h */,
+				A602C4C11AF8A0B500CB7A51 /* LSCollectionViewLayoutHelper.m */,
+				A602C4C21AF8A0B500CB7A51 /* UICollectionView+Draggable.h */,
+				A602C4C31AF8A0B500CB7A51 /* UICollectionView+Draggable.m */,
+				A602C4C41AF8A0B500CB7A51 /* UICollectionViewDataSource_Draggable.h */,
+				A602C4C51AF8A0B500CB7A51 /* UICollectionViewLayout_Warpable.h */,
 			);
-			path = DraggableCollectionView;
-			sourceTree = SOURCE_ROOT;
-		};
-		8E947CD917545C100077D957 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				8E947CDA17545C100077D957 /* DraggableCollectionViewFlowLayout.h */,
-				8E947CDB17545C100077D957 /* DraggableCollectionViewFlowLayout.m */,
-			);
-			path = Layout;
-			sourceTree = "<group>";
-		};
-		8E947CDD17545C370077D957 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				8E947CDE17545C370077D957 /* LSCollectionViewHelper.h */,
-				8E947CDF17545C370077D957 /* LSCollectionViewHelper.m */,
-				8E947CE017545C370077D957 /* LSCollectionViewLayoutHelper.h */,
-				8E947CE117545C370077D957 /* LSCollectionViewLayoutHelper.m */,
-			);
-			path = Helpers;
+			name = Source;
+			path = ../Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,14 +219,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A602C4C91AF8A0B500CB7A51 /* UICollectionView+Draggable.m in Sources */,
 				8E947CAF175458980077D957 /* main.m in Sources */,
+				A602C4C81AF8A0B500CB7A51 /* LSCollectionViewLayoutHelper.m in Sources */,
 				8E947CB3175458980077D957 /* AppDelegate.m in Sources */,
 				8E947CC2175458980077D957 /* ViewController.m in Sources */,
+				A602C4C61AF8A0B500CB7A51 /* DraggableCollectionViewFlowLayout.m in Sources */,
 				8E947CD817545AF10077D957 /* Cell.m in Sources */,
-				8E947CD31754593B0077D957 /* UICollectionView+Draggable.m in Sources */,
-				8E947CDC17545C100077D957 /* DraggableCollectionViewFlowLayout.m in Sources */,
-				8E947CE217545C370077D957 /* LSCollectionViewHelper.m in Sources */,
-				8E947CE317545C370077D957 /* LSCollectionViewLayoutHelper.m in Sources */,
+				A602C4C71AF8A0B500CB7A51 /* LSCollectionViewHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
