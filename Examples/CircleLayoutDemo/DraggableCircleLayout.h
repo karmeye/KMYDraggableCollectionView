@@ -5,9 +5,8 @@
 //
 
 #import "CircleLayout.h"
-#import "UICollectionViewLayout_Warpable.h"
+#import "KMYCollectionViewLayoutModifier.h"
 
-@interface DraggableCircleLayout : CircleLayout <UICollectionViewLayout_Warpable>
+@interface DraggableCircleLayout : CircleLayout <KMYCollectionViewLayoutModifying>
 
-@property (readonly, nonatomic) LSCollectionViewLayoutHelper *layoutHelper;
 @end

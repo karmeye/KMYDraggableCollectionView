@@ -8,10 +8,17 @@
 #import "Cell.h"
 #import "DraggableCircleLayout.h"
 
-@interface ViewController ()
+#import "KMYCollectionViewDraggingCoordinator.h"
+#import "KMYCollectionViewLayoutMoveModifier.h"
+#import "KMYDraggableCollectionViewDataSource.h"
+
+@interface ViewController () <KMYDraggableCollectionViewDataSource, UICollectionViewDelegate>
 {
     NSMutableArray *data;
 }
+
+@property (nonatomic, strong)                   KMYCollectionViewDraggingCoordinator        *draggingCoordinator;
+
 @end
 
 @implementation ViewController
@@ -19,13 +26,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    self.draggingCoordinator.enabled                = YES;
+
     data = [[NSMutableArray alloc] initWithCapacity:20];
     for(int i = 0; i < 20; i++) {
         [data addObject:@(i)];
     }
-    
-    self.collectionView.collectionViewLayout = [[DraggableCircleLayout alloc] init];
+}
+
+- (KMYCollectionViewDraggingCoordinator*)draggingCoordinator
+{
+    if (!_draggingCoordinator) {
+        KMYCollectionViewLayoutMoveModifier *layoutHelper = [[KMYCollectionViewLayoutMoveModifier alloc] initWithCollectionViewLayout:self.collectionView.collectionViewLayout];
+        _draggingCoordinator = [[KMYCollectionViewDraggingCoordinator alloc] initWithCollectionView:self.collectionView layoutModifiers:@[layoutHelper]];
+    }
+    return _draggingCoordinator;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -37,17 +53,17 @@
 {
     Cell *cell = (Cell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     NSNumber *index = [data objectAtIndex:indexPath.item];
-    cell.label.text = [NSString stringWithFormat:@"%d", index.integerValue];
+    cell.label.text = [NSString stringWithFormat:@"%ld", (long)index.integerValue];
     
     return cell;
 }
 
-- (BOOL)collectionView:(LSCollectionViewHelper *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
 }
 
-- (void)collectionView:(LSCollectionViewHelper *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
     NSNumber *index = [data objectAtIndex:fromIndexPath.item];
     [data removeObjectAtIndex:fromIndexPath.item];

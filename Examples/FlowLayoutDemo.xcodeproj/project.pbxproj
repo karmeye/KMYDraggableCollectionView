@@ -22,9 +22,9 @@
 		8E947CD817545AF10077D957 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947CD51754598E0077D957 /* Cell.m */; };
 		8E955E881793ADF5008F72D9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E955E871793ADF5008F72D9 /* QuartzCore.framework */; };
 		A602C4E81AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4DD1AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.m */; };
-		A602C4EA1AF9049300CB7A51 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4E31AF9049300CB7A51 /* LSCollectionViewLayoutHelper.m */; };
-		A602C4EE1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4ED1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.m */; };
 		A602C4F21AF9137B00CB7A51 /* KMYDraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4F11AF9137B00CB7A51 /* KMYDraggableCollectionViewFlowLayout.m */; };
+		A60C18C91AF9ED6F0086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A60C18C81AF9ED6F0086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m */; };
+		A60C18CC1AF9F3380086BF5A /* KMYCollectionViewLayoutMoveModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A60C18CB1AF9F3380086BF5A /* KMYCollectionViewLayoutMoveModifier.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,12 +52,13 @@
 		A602C4DD1AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYCollectionViewDraggingCoordinator.m; sourceTree = "<group>"; };
 		A602C4DE1AF9049300CB7A51 /* KMYCollectionViewLayoutModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYCollectionViewLayoutModifier.h; sourceTree = "<group>"; };
 		A602C4DF1AF9049300CB7A51 /* KMYDraggableCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionViewDataSource.h; sourceTree = "<group>"; };
-		A602C4E21AF9049300CB7A51 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
-		A602C4E31AF9049300CB7A51 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
-		A602C4EC1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionViewLayout.h; sourceTree = "<group>"; };
-		A602C4ED1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYDraggableCollectionViewLayout.m; sourceTree = "<group>"; };
 		A602C4F01AF9137B00CB7A51 /* KMYDraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		A602C4F11AF9137B00CB7A51 /* KMYDraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYDraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		A60C18C71AF9ED6F0086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewLayout+KMYCollectionViewLayout.h"; sourceTree = "<group>"; };
+		A60C18C81AF9ED6F0086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewLayout+KMYCollectionViewLayout.m"; sourceTree = "<group>"; };
+		A60C18CA1AF9F3380086BF5A /* KMYCollectionViewLayoutMoveModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYCollectionViewLayoutMoveModifier.h; sourceTree = "<group>"; };
+		A60C18CB1AF9F3380086BF5A /* KMYCollectionViewLayoutMoveModifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYCollectionViewLayoutMoveModifier.m; sourceTree = "<group>"; };
+		A60C18E01AF9FE400086BF5A /* KMYDraggableCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,12 +108,12 @@
 		8E947CA8175458980077D957 /* FlowLayoutDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8E947CC0175458980077D957 /* ViewController.h */,
+				8E947CC1175458980077D957 /* ViewController.m */,
 				8E947CB1175458980077D957 /* AppDelegate.h */,
 				8E947CB2175458980077D957 /* AppDelegate.m */,
 				8E11CC4E1759BB5E004D2284 /* MainStoryboard_iPad.storyboard */,
 				8E11CC501759BB5E004D2284 /* MainStoryboard_iPhone.storyboard */,
-				8E947CC0175458980077D957 /* ViewController.h */,
-				8E947CC1175458980077D957 /* ViewController.m */,
 				8E947CD41754598E0077D957 /* Cell.h */,
 				8E947CD51754598E0077D957 /* Cell.m */,
 				8E947CA9175458980077D957 /* Supporting Files */,
@@ -139,14 +140,15 @@
 			children = (
 				A602C4DC1AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.h */,
 				A602C4DD1AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.m */,
-				A602C4E21AF9049300CB7A51 /* LSCollectionViewLayoutHelper.h */,
-				A602C4E31AF9049300CB7A51 /* LSCollectionViewLayoutHelper.m */,
 				A602C4DE1AF9049300CB7A51 /* KMYCollectionViewLayoutModifier.h */,
 				A602C4DF1AF9049300CB7A51 /* KMYDraggableCollectionViewDataSource.h */,
-				A602C4EC1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.h */,
-				A602C4ED1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.m */,
 				A602C4F01AF9137B00CB7A51 /* KMYDraggableCollectionViewFlowLayout.h */,
 				A602C4F11AF9137B00CB7A51 /* KMYDraggableCollectionViewFlowLayout.m */,
+				A60C18C71AF9ED6F0086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.h */,
+				A60C18C81AF9ED6F0086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m */,
+				A60C18CA1AF9F3380086BF5A /* KMYCollectionViewLayoutMoveModifier.h */,
+				A60C18CB1AF9F3380086BF5A /* KMYCollectionViewLayoutMoveModifier.m */,
+				A60C18E01AF9FE400086BF5A /* KMYDraggableCollectionView.h */,
 			);
 			name = Source;
 			path = ../Source;
@@ -221,11 +223,11 @@
 			files = (
 				A602C4F21AF9137B00CB7A51 /* KMYDraggableCollectionViewFlowLayout.m in Sources */,
 				8E947CAF175458980077D957 /* main.m in Sources */,
+				A60C18CC1AF9F3380086BF5A /* KMYCollectionViewLayoutMoveModifier.m in Sources */,
 				8E947CB3175458980077D957 /* AppDelegate.m in Sources */,
-				A602C4EE1AF904E000CB7A51 /* KMYDraggableCollectionViewLayout.m in Sources */,
+				A60C18C91AF9ED6F0086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m in Sources */,
 				8E947CC2175458980077D957 /* ViewController.m in Sources */,
 				A602C4E81AF9049300CB7A51 /* KMYCollectionViewDraggingCoordinator.m in Sources */,
-				A602C4EA1AF9049300CB7A51 /* LSCollectionViewLayoutHelper.m in Sources */,
 				8E947CD817545AF10077D957 /* Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

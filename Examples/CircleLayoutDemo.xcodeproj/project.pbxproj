@@ -23,10 +23,10 @@
 		8E947D0117545E190077D957 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947CF617545E190077D957 /* ViewController.m */; };
 		8E947D1817545F870077D957 /* CircleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947D1517545F190077D957 /* CircleLayout.m */; };
 		8E947D1917545F8A0077D957 /* DraggableCircleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E947D1717545F190077D957 /* DraggableCircleLayout.m */; };
-		A602C4B71AF8A07F00CB7A51 /* DraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4AE1AF8A07F00CB7A51 /* DraggableCollectionViewFlowLayout.m */; };
-		A602C4B81AF8A07F00CB7A51 /* LSCollectionViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4B01AF8A07F00CB7A51 /* LSCollectionViewHelper.m */; };
-		A602C4B91AF8A07F00CB7A51 /* LSCollectionViewLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4B21AF8A07F00CB7A51 /* LSCollectionViewLayoutHelper.m */; };
-		A602C4BA1AF8A07F00CB7A51 /* UICollectionView+Draggable.m in Sources */ = {isa = PBXBuildFile; fileRef = A602C4B41AF8A07F00CB7A51 /* UICollectionView+Draggable.m */; };
+		A60C18ED1AF9FF020086BF5A /* KMYCollectionViewDraggingCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = A60C18E31AF9FF020086BF5A /* KMYCollectionViewDraggingCoordinator.m */; };
+		A60C18EE1AF9FF020086BF5A /* KMYCollectionViewLayoutMoveModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A60C18E61AF9FF020086BF5A /* KMYCollectionViewLayoutMoveModifier.m */; };
+		A60C18EF1AF9FF020086BF5A /* KMYDraggableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A60C18EA1AF9FF020086BF5A /* KMYDraggableCollectionViewFlowLayout.m */; };
+		A60C18F01AF9FF020086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A60C18EC1AF9FF020086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,16 +54,17 @@
 		8E947D1517545F190077D957 /* CircleLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleLayout.m; sourceTree = "<group>"; };
 		8E947D1617545F190077D957 /* DraggableCircleLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DraggableCircleLayout.h; sourceTree = "<group>"; };
 		8E947D1717545F190077D957 /* DraggableCircleLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DraggableCircleLayout.m; sourceTree = "<group>"; };
-		A602C4AD1AF8A07F00CB7A51 /* DraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		A602C4AE1AF8A07F00CB7A51 /* DraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		A602C4AF1AF8A07F00CB7A51 /* LSCollectionViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewHelper.h; sourceTree = "<group>"; };
-		A602C4B01AF8A07F00CB7A51 /* LSCollectionViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewHelper.m; sourceTree = "<group>"; };
-		A602C4B11AF8A07F00CB7A51 /* LSCollectionViewLayoutHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSCollectionViewLayoutHelper.h; sourceTree = "<group>"; };
-		A602C4B21AF8A07F00CB7A51 /* LSCollectionViewLayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSCollectionViewLayoutHelper.m; sourceTree = "<group>"; };
-		A602C4B31AF8A07F00CB7A51 /* UICollectionView+Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Draggable.h"; sourceTree = "<group>"; };
-		A602C4B41AF8A07F00CB7A51 /* UICollectionView+Draggable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Draggable.m"; sourceTree = "<group>"; };
-		A602C4B51AF8A07F00CB7A51 /* UICollectionViewDataSource_Draggable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewDataSource_Draggable.h; sourceTree = "<group>"; };
-		A602C4B61AF8A07F00CB7A51 /* UICollectionViewLayout_Warpable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICollectionViewLayout_Warpable.h; sourceTree = "<group>"; };
+		A60C18E21AF9FF020086BF5A /* KMYCollectionViewDraggingCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYCollectionViewDraggingCoordinator.h; sourceTree = "<group>"; };
+		A60C18E31AF9FF020086BF5A /* KMYCollectionViewDraggingCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYCollectionViewDraggingCoordinator.m; sourceTree = "<group>"; };
+		A60C18E41AF9FF020086BF5A /* KMYCollectionViewLayoutModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYCollectionViewLayoutModifier.h; sourceTree = "<group>"; };
+		A60C18E51AF9FF020086BF5A /* KMYCollectionViewLayoutMoveModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYCollectionViewLayoutMoveModifier.h; sourceTree = "<group>"; };
+		A60C18E61AF9FF020086BF5A /* KMYCollectionViewLayoutMoveModifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYCollectionViewLayoutMoveModifier.m; sourceTree = "<group>"; };
+		A60C18E71AF9FF020086BF5A /* KMYDraggableCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionView.h; sourceTree = "<group>"; };
+		A60C18E81AF9FF020086BF5A /* KMYDraggableCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionViewDataSource.h; sourceTree = "<group>"; };
+		A60C18E91AF9FF020086BF5A /* KMYDraggableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMYDraggableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		A60C18EA1AF9FF020086BF5A /* KMYDraggableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMYDraggableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		A60C18EB1AF9FF020086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewLayout+KMYCollectionViewLayout.h"; sourceTree = "<group>"; };
+		A60C18EC1AF9FF020086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewLayout+KMYCollectionViewLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +85,8 @@
 		8E947C96175458980077D957 = {
 			isa = PBXGroup;
 			children = (
+				A60C18E11AF9FF020086BF5A /* Source */,
 				8E947CE417545E190077D957 /* CircleLayoutDemo */,
-				A602C4AC1AF8A07F00CB7A51 /* Source */,
 				8E947CA1175458980077D957 /* Frameworks */,
 				8E947CA0175458980077D957 /* Products */,
 			);
@@ -113,12 +114,12 @@
 		8E947CE417545E190077D957 /* CircleLayoutDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8E947CF517545E190077D957 /* ViewController.h */,
+				8E947CF617545E190077D957 /* ViewController.m */,
 				8E947CE517545E190077D957 /* AppDelegate.h */,
 				8E947CE617545E190077D957 /* AppDelegate.m */,
 				8E947CF017545E190077D957 /* MainStoryboard_iPad.storyboard */,
 				8E947CF217545E190077D957 /* MainStoryboard_iPhone.storyboard */,
-				8E947CF517545E190077D957 /* ViewController.h */,
-				8E947CF617545E190077D957 /* ViewController.m */,
 				8E947CE717545E190077D957 /* Cell.h */,
 				8E947CE817545E190077D957 /* Cell.m */,
 				8E947D1617545F190077D957 /* DraggableCircleLayout.h */,
@@ -144,19 +145,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A602C4AC1AF8A07F00CB7A51 /* Source */ = {
+		A60C18E11AF9FF020086BF5A /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				A602C4AD1AF8A07F00CB7A51 /* DraggableCollectionViewFlowLayout.h */,
-				A602C4AE1AF8A07F00CB7A51 /* DraggableCollectionViewFlowLayout.m */,
-				A602C4AF1AF8A07F00CB7A51 /* LSCollectionViewHelper.h */,
-				A602C4B01AF8A07F00CB7A51 /* LSCollectionViewHelper.m */,
-				A602C4B11AF8A07F00CB7A51 /* LSCollectionViewLayoutHelper.h */,
-				A602C4B21AF8A07F00CB7A51 /* LSCollectionViewLayoutHelper.m */,
-				A602C4B31AF8A07F00CB7A51 /* UICollectionView+Draggable.h */,
-				A602C4B41AF8A07F00CB7A51 /* UICollectionView+Draggable.m */,
-				A602C4B51AF8A07F00CB7A51 /* UICollectionViewDataSource_Draggable.h */,
-				A602C4B61AF8A07F00CB7A51 /* UICollectionViewLayout_Warpable.h */,
+				A60C18E21AF9FF020086BF5A /* KMYCollectionViewDraggingCoordinator.h */,
+				A60C18E31AF9FF020086BF5A /* KMYCollectionViewDraggingCoordinator.m */,
+				A60C18E41AF9FF020086BF5A /* KMYCollectionViewLayoutModifier.h */,
+				A60C18E51AF9FF020086BF5A /* KMYCollectionViewLayoutMoveModifier.h */,
+				A60C18E61AF9FF020086BF5A /* KMYCollectionViewLayoutMoveModifier.m */,
+				A60C18E71AF9FF020086BF5A /* KMYDraggableCollectionView.h */,
+				A60C18E81AF9FF020086BF5A /* KMYDraggableCollectionViewDataSource.h */,
+				A60C18E91AF9FF020086BF5A /* KMYDraggableCollectionViewFlowLayout.h */,
+				A60C18EA1AF9FF020086BF5A /* KMYDraggableCollectionViewFlowLayout.m */,
+				A60C18EB1AF9FF020086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.h */,
+				A60C18EC1AF9FF020086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m */,
 			);
 			name = Source;
 			path = ../Source;
@@ -230,15 +232,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E947CF717545E190077D957 /* AppDelegate.m in Sources */,
-				A602C4B81AF8A07F00CB7A51 /* LSCollectionViewHelper.m in Sources */,
+				A60C18F01AF9FF020086BF5A /* UICollectionViewLayout+KMYCollectionViewLayout.m in Sources */,
+				A60C18ED1AF9FF020086BF5A /* KMYCollectionViewDraggingCoordinator.m in Sources */,
 				8E947CF817545E190077D957 /* Cell.m in Sources */,
 				8E947D0017545E190077D957 /* main.m in Sources */,
+				A60C18EE1AF9FF020086BF5A /* KMYCollectionViewLayoutMoveModifier.m in Sources */,
 				8E947D0117545E190077D957 /* ViewController.m in Sources */,
-				A602C4B71AF8A07F00CB7A51 /* DraggableCollectionViewFlowLayout.m in Sources */,
-				A602C4BA1AF8A07F00CB7A51 /* UICollectionView+Draggable.m in Sources */,
-				A602C4B91AF8A07F00CB7A51 /* LSCollectionViewLayoutHelper.m in Sources */,
 				8E947D1817545F870077D957 /* CircleLayout.m in Sources */,
 				8E947D1917545F8A0077D957 /* DraggableCircleLayout.m in Sources */,
+				A60C18EF1AF9FF020086BF5A /* KMYDraggableCollectionViewFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 #import <UIKit/UIKit.h>
 #import "KMYCollectionViewLayoutModifier.h"
 
-@interface KMYDraggableCollectionViewFlowLayout : UICollectionViewFlowLayout
+@interface KMYDraggableCollectionViewFlowLayout : UICollectionViewFlowLayout  <KMYCollectionViewLayoutModifying>
 
 /// Array of @c id<KMYCollectionViewModifier>
 @property (nonatomic, strong)   NSArray     *layoutModifiers;

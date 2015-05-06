@@ -5,18 +5,13 @@
 //
 
 #import "KMYDraggableCollectionViewFlowLayout.h"
+#import "UICollectionViewLayout+KMYCollectionViewLayout.h"
 
 @implementation KMYDraggableCollectionViewFlowLayout
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSArray *layoutAttributes = [super layoutAttributesForElementsInRect:rect];
-
-    for (id<KMYCollectionViewLayoutModifier> modifier in self.layoutModifiers) {
-        layoutAttributes = [modifier modifiedLayoutAttributesForElements:layoutAttributes];
-    }
-
-    return layoutAttributes;
+    return [self kmy_modifiedLayoutAttributes:[super layoutAttributesForElementsInRect:rect] forElementsInRect:rect withModifiers:self.layoutModifiers];
 }
 
 @end

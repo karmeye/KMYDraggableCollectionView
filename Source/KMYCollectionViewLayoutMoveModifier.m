@@ -1,16 +1,12 @@
 //
-//  Copyright (c) 2013 Luke Scott
-//  https://github.com/lukescott/DraggableCollectionView
+//  Copyright (c) 2015 Karmeye
+//  https://github.com/karmeye/KMYDraggableCollectionView
 //  Distributed under MIT license
 //
 
-#import "LSCollectionViewLayoutHelper.h"
+#import "KMYCollectionViewLayoutMoveModifier.h"
 
-@interface LSCollectionViewLayoutHelper ()
-
-@end
-
-@implementation LSCollectionViewLayoutHelper
+@implementation KMYCollectionViewLayoutMoveModifier
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout
 {
@@ -19,7 +15,7 @@
     if (self) {
         self.collectionViewLayout = collectionViewLayout;
     }
-    
+
     return self;
 }
 
@@ -32,7 +28,7 @@
     NSIndexPath *toIndexPath            = self.toIndexPath;
     NSIndexPath *hideIndexPath          = self.hideIndexPath;
     NSIndexPath *indexPathToRemove;
-    
+
     if (toIndexPath == nil) {
         if (hideIndexPath == nil) {
             return elements;
@@ -47,12 +43,12 @@
         }
         return elements;
     }
-    
+
     if (fromIndexPath.section != toIndexPath.section) {
         indexPathToRemove = [NSIndexPath indexPathForItem:[collectionView numberOfItemsInSection:fromIndexPath.section] - 1
                                                 inSection:fromIndexPath.section];
     }
-    
+
     for (UICollectionViewLayoutAttributes *layoutAttributes in elements) {
         if(layoutAttributes.representedElementCategory != UICollectionElementCategoryCell) {
             continue;
@@ -94,7 +90,7 @@
             }
         }
     }
-    
+
     return elements;
 }
 

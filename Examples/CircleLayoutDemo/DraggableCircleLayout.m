@@ -5,27 +5,21 @@
 //
 
 #import "DraggableCircleLayout.h"
-#import "LSCollectionViewLayoutHelper.h"
+#import "UICollectionViewLayout+KMYCollectionViewLayout.h"
 
 @interface DraggableCircleLayout ()
 {
-    LSCollectionViewLayoutHelper *_layoutHelper;
+
 }
 @end
 
 @implementation DraggableCircleLayout
 
-- (LSCollectionViewLayoutHelper *)layoutHelper
-{
-    if(_layoutHelper == nil) {
-        _layoutHelper = [[LSCollectionViewLayoutHelper alloc] initWithCollectionViewLayout:self];
-    }
-    return _layoutHelper;
-}
+@synthesize layoutModifiers;
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    return [self.layoutHelper modifiedLayoutAttributesForElements:[super layoutAttributesForElementsInRect:rect]];
+    return [self kmy_modifiedLayoutAttributes:[super layoutAttributesForElementsInRect:rect] forElementsInRect:rect withModifiers:self.layoutModifiers];
 }
 
 @end

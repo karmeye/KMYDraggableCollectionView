@@ -6,14 +6,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class LSCollectionViewLayoutHelper;
-
 @interface KMYCollectionViewDraggingCoordinator : NSObject
 
-- (instancetype)initWithCollectionView:(UICollectionView *)collectionView layoutHelper:(LSCollectionViewLayoutHelper*)layoutHelper;
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView layoutModifiers:(NSArray*)layoutModifiers;
 
 @property (nonatomic, assign)               UIEdgeInsets                    scrollingEdgeInsets;
 @property (nonatomic, assign)               CGFloat                         scrollingSpeed;
 @property (nonatomic, assign)               BOOL                            enabled;
 @property (nonatomic, strong, readonly)     UILongPressGestureRecognizer    *longPressGestureRecognizer;
+
 @end

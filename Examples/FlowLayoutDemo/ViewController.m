@@ -7,10 +7,7 @@
 #import "ViewController.h"
 #import "Cell.h"
 
-#import "KMYCollectionViewDraggingCoordinator.h"
-#import "LSCollectionViewLayoutHelper.h"
-#import "KMYDraggableCollectionViewLayout.h"
-#import "KMYDraggableCollectionViewDataSource.h"
+#import "KMYDraggableCollectionView.h"
 
 #define SECTION_COUNT 5
 #define ITEM_COUNT 20
@@ -30,12 +27,6 @@
 {
     [super viewDidLoad];
 
-    LSCollectionViewLayoutHelper *layoutHelper      = [[LSCollectionViewLayoutHelper alloc] initWithCollectionViewLayout:self.collectionView.collectionViewLayout];
-
-    ((KMYDraggableCollectionViewLayout*)self.collectionView.collectionViewLayout).layoutModifiers = @[layoutHelper];
-
-    self.draggingCoordinator                        = [[KMYCollectionViewDraggingCoordinator alloc] initWithCollectionView:self.collectionView layoutHelper:layoutHelper];
-
     self.draggingCoordinator.enabled                = YES;
     self.draggingCoordinator.scrollingEdgeInsets    = UIEdgeInsetsMake(100.0f, 100.0f, 100.0f, 100.0f);
     self.draggingCoordinator.scrollingSpeed         = 600;
@@ -48,6 +39,15 @@
         }
         [sections addObject:data];
     }
+}
+
+- (KMYCollectionViewDraggingCoordinator*)draggingCoordinator
+{
+    if (!_draggingCoordinator) {
+        KMYCollectionViewLayoutMoveModifier *layoutHelper = [[KMYCollectionViewLayoutMoveModifier alloc] initWithCollectionViewLayout:self.collectionView.collectionViewLayout];
+        _draggingCoordinator = [[KMYCollectionViewDraggingCoordinator alloc] initWithCollectionView:self.collectionView layoutModifiers:@[layoutHelper]];
+    }
+    return _draggingCoordinator;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

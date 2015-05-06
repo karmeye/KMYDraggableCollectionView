@@ -1,14 +1,12 @@
 //
-//  KMYCollectionViewDraggingCoordinator.m
-//  Pods
-//
-//  Created by Rassol Raissi on 05/05/15.
-//
+//  Copyright (c) 2015 Karmeye
+//  https://github.com/karmeye/KMYDraggableCollectionView
+//  Distributed under MIT license
 //
 
 #import "KMYCollectionViewDraggingCoordinator.h"
 #import "KMYDraggableCollectionViewDataSource.h"
-#import "LSCollectionViewLayoutHelper.h"
+#import "KMYCollectionViewLayoutMoveModifier.h"
 
 static int kObservingCollectionViewLayoutContext;
 
@@ -39,9 +37,9 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     BOOL canScroll;
 }
 
-@property (nonatomic, strong, readonly)     LSCollectionViewLayoutHelper    *layoutHelper;
-@property (nonatomic, strong, readonly)     UICollectionView                *collectionView;
-@property (nonatomic, strong, readonly) 	UIGestureRecognizer             *panPressGestureRecognizer;
+@property (nonatomic, strong, readonly)     KMYCollectionViewLayoutMoveModifier    *layoutHelper;
+@property (nonatomic, strong, readonly)     UICollectionView                        *collectionView;
+@property (nonatomic, strong, readonly) 	UIGestureRecognizer                     *panPressGestureRecognizer;
 
 @end
 
@@ -49,23 +47,35 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
 @implementation KMYCollectionViewDraggingCoordinator
 
-- (instancetype)initWithCollectionView:(UICollectionView *)collectionView layoutHelper:(LSCollectionViewLayoutHelper*)layoutHelper
+- (instancetype)initWithCollectionView:(UICollectionView *)collectionView layoutModifiers:(NSArray*)layoutModifiers
 {
+    NSParameterAssert(collectionView.collectionViewLayout);
+    
     self = [super init];
 
     if (self)
     {
-        _layoutHelper = layoutHelper;
         _collectionView = collectionView;
 
-        // TODO: Support changing layout
+        for (id<KMYCollectionViewLayoutModifier> modifier in layoutModifiers)
+        {
+            if (!_layoutHelper && [modifier isKindOfClass:[KMYCollectionViewLayoutMoveModifier class]]) {
+                _layoutHelper = modifier;
+            }
+        }
+
+        if ([collectionView.collectionViewLayout conformsToProtocol:@protocol(KMYCollectionViewLayoutModifying)]) {
+            ((id<KMYCollectionViewLayoutModifying>)collectionView.collectionViewLayout).layoutModifiers = layoutModifiers;
+        }
+
+//      TODO: Support changing layout
 //        [_collectionView addObserver:self
 //                          forKeyPath:@"collectionViewLayout"
 //                             options:0
 //                             context:&kObservingCollectionViewLayoutContext];
 
-        _scrollingEdgeInsets = UIEdgeInsetsMake(50.0f, 50.0f, 50.0f, 50.0f);
-        _scrollingSpeed = 300.f;
+        _scrollingEdgeInsets    = UIEdgeInsetsMake(50.0f, 50.0f, 50.0f, 50.0f);
+        _scrollingSpeed         = 300.f;
 
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
         [_collectionView addGestureRecognizer:_longPressGestureRecognizer];
@@ -85,6 +95,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
         [self layoutChanged];
     }
+
     return self;
 }
 
