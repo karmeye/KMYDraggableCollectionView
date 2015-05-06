@@ -21,6 +21,11 @@ self.draggingCoordinator.scrollingSpeed         = 600;
 
 ```
 
+## Compability
+
+iOS 7 and later.
+Examples tested on Xcode 6.3.
+
 ## License
 
 KMYDraggableCollectionView is available under the [MIT license](LICENSE).
