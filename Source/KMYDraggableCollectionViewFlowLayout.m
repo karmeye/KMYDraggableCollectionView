@@ -9,6 +9,8 @@
 
 @implementation KMYDraggableCollectionViewFlowLayout
 
+@synthesize layoutModifiers;
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     return [self kmy_modifiedLayoutAttributes:[super layoutAttributesForElementsInRect:rect] forElementsInRect:rect withModifiers:self.layoutModifiers];

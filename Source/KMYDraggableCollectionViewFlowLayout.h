@@ -9,7 +9,4 @@
 
 @interface KMYDraggableCollectionViewFlowLayout : UICollectionViewFlowLayout  <KMYCollectionViewLayoutModifying>
 
-/// Array of @c id<KMYCollectionViewModifier>
-@property (nonatomic, strong)   NSArray     *layoutModifiers;
-
 @end
