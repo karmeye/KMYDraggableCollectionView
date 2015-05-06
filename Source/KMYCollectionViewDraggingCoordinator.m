@@ -39,13 +39,16 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
 @property (nonatomic, strong, readonly)     KMYCollectionViewLayoutMoveModifier     *layoutMoveModifier;
 @property (nonatomic, strong, readonly)     UICollectionView                        *collectionView;
-@property (nonatomic, strong, readonly) 	UIGestureRecognizer                     *panPressGestureRecognizer;
+@property (nonatomic, strong, readonly) 	UIPanGestureRecognizer                  *panPressGestureRecognizer;
 
 @end
 
 #pragma mark -
 
 @implementation KMYCollectionViewDraggingCoordinator
+
+@synthesize longPressGestureRecognizer = _longPressGestureRecognizer,
+            panPressGestureRecognizer = _panPressGestureRecognizer;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)collectionView layoutModifiers:(NSArray*)layoutModifiers
 {
@@ -77,13 +80,8 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
         _scrollingEdgeInsets    = UIEdgeInsetsMake(50.0f, 50.0f, 50.0f, 50.0f);
         _scrollingSpeed         = 300.f;
 
-        _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-        _longPressGestureRecognizer.delegate = self;
-        [_collectionView addGestureRecognizer:_longPressGestureRecognizer];
-
-        _panPressGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-        _panPressGestureRecognizer.delegate = self;
-        [_collectionView addGestureRecognizer:_panPressGestureRecognizer];
+        [_collectionView addGestureRecognizer:self.longPressGestureRecognizer];
+        [_collectionView addGestureRecognizer:self.panPressGestureRecognizer];
 
         for (UIGestureRecognizer *gestureRecognizer in _collectionView.gestureRecognizers)
         {
@@ -142,6 +140,30 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     replicantView.frame = view.frame;
     return replicantView;
 }
+
+- (UILongPressGestureRecognizer*)longPressGestureRecognizer
+{
+    if (!_longPressGestureRecognizer)
+    {
+        _longPressGestureRecognizer             = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+        _longPressGestureRecognizer.delegate    = self;
+    }
+
+    return _longPressGestureRecognizer;
+}
+
+- (UIPanGestureRecognizer*)panPressGestureRecognizer
+{
+    if (!_panPressGestureRecognizer)
+    {
+        _panPressGestureRecognizer          = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+        _panPressGestureRecognizer.delegate = self;
+    }
+
+    return _panPressGestureRecognizer;
+}
+
+#pragma mark -
 
 - (NSIndexPath *)indexPathForItemClosestToPoint:(CGPoint)point
 {
@@ -331,6 +353,8 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
     return NO;
 }
+
+#pragma mark - Gesture Actions
 
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)gestureRecognizer
 {
