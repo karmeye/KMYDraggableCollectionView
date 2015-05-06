@@ -41,7 +41,6 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
 @property (nonatomic, strong, readonly)     LSCollectionViewLayoutHelper    *layoutHelper;
 @property (nonatomic, strong, readonly)     UICollectionView                *collectionView;
-@property (nonatomic, strong, readonly)     UIGestureRecognizer             *longPressGestureRecognizer;
 @property (nonatomic, strong, readonly) 	UIGestureRecognizer             *panPressGestureRecognizer;
 
 @end
