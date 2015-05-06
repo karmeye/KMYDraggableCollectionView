@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     BOOL canScroll;
 }
 
-@property (nonatomic, strong, readonly)     KMYCollectionViewLayoutMoveModifier    *layoutHelper;
+@property (nonatomic, strong, readonly)     KMYCollectionViewLayoutMoveModifier     *layoutMoveModifier;
 @property (nonatomic, strong, readonly)     UICollectionView                        *collectionView;
 @property (nonatomic, strong, readonly) 	UIGestureRecognizer                     *panPressGestureRecognizer;
 
@@ -59,8 +59,8 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
         for (id<KMYCollectionViewLayoutModifier> modifier in layoutModifiers)
         {
-            if (!_layoutHelper && [modifier isKindOfClass:[KMYCollectionViewLayoutMoveModifier class]]) {
-                _layoutHelper = modifier;
+            if (!_layoutMoveModifier && [modifier isKindOfClass:[KMYCollectionViewLayoutMoveModifier class]]) {
+                _layoutMoveModifier = modifier;
             }
         }
 
@@ -147,12 +147,12 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     NSArray *layoutAttrsInRect;
     NSInteger closestDist = NSIntegerMax;
     NSIndexPath *indexPath;
-    NSIndexPath *toIndexPath = self.layoutHelper.toIndexPath;
+    NSIndexPath *toIndexPath = self.layoutMoveModifier.toIndexPath;
 
     // We need original positions of cells
-    self.layoutHelper.toIndexPath = nil;
+    self.layoutMoveModifier.toIndexPath = nil;
     layoutAttrsInRect = [self.collectionView.collectionViewLayout layoutAttributesForElementsInRect:self.collectionView.bounds];
-    self.layoutHelper.toIndexPath = toIndexPath;
+    self.layoutMoveModifier.toIndexPath = toIndexPath;
 
     // What cell are we closest to?
     for (UICollectionViewLayoutAttributes *layoutAttr in layoutAttrsInRect) {
@@ -168,7 +168,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     // Are we closer to being the last cell in a different section?
     NSInteger sections = [self.collectionView numberOfSections];
     for (NSInteger i = 0; i < sections; ++i) {
-        if (i == self.layoutHelper.fromIndexPath.section) {
+        if (i == self.layoutMoveModifier.fromIndexPath.section) {
             continue;
         }
         NSInteger items = [self.collectionView numberOfItemsInSection:i];
@@ -209,13 +209,13 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     if ([self.collectionView.dataSource respondsToSelector:@selector(collectionView:canMoveItemAtIndexPath:toIndexPath:)] == YES
         && [(id<KMYDraggableCollectionViewDataSource>)self.collectionView.dataSource
             collectionView:self.collectionView
-            canMoveItemAtIndexPath:self.layoutHelper.fromIndexPath
+            canMoveItemAtIndexPath:self.layoutMoveModifier.fromIndexPath
             toIndexPath:indexPath] == NO) {
             return;
         }
     [self.collectionView performBatchUpdates:^{
-        self.layoutHelper.hideIndexPath = indexPath;
-        self.layoutHelper.toIndexPath = indexPath;
+        self.layoutMoveModifier.hideIndexPath = indexPath;
+        self.layoutMoveModifier.toIndexPath = indexPath;
     } completion:nil];
 }
 
@@ -307,13 +307,14 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     }
 }
 
-#pragma mark - Gesture Recognizers
+#pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    if([gestureRecognizer isEqual:_panPressGestureRecognizer]) {
-        return self.layoutHelper.fromIndexPath != nil;
+    if(gestureRecognizer == _panPressGestureRecognizer) {
+        return self.layoutMoveModifier.fromIndexPath != nil;
     }
+    
     return YES;
 }
 
@@ -330,9 +331,9 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     return NO;
 }
 
-- (void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender
+- (void)handleLongPressGesture:(UILongPressGestureRecognizer *)gestureRecognizer
 {
-    if (sender.state == UIGestureRecognizerStateChanged) {
+    if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
         return;
     }
 
@@ -341,18 +342,30 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 //        return;
 //    }
 
-    NSIndexPath *indexPath = [self indexPathForItemClosestToPoint:[sender locationInView:self.collectionView]];
+    NSIndexPath *indexPath = [self indexPathForItemClosestToPoint:[gestureRecognizer locationInView:self.collectionView]];
 
-    switch (sender.state) {
-        case UIGestureRecognizerStateBegan: {
+    switch (gestureRecognizer.state)
+    {
+        case UIGestureRecognizerStateBegan:
+        {
             if (indexPath == nil) {
                 return;
             }
-            if (![(id<KMYDraggableCollectionViewDataSource>)self.collectionView.dataSource
-                  collectionView:self.collectionView
-                  canMoveItemAtIndexPath:indexPath]) {
+
+            if (![(id<KMYDraggableCollectionViewDataSource>)self.collectionView.dataSource collectionView:self.collectionView canMoveItemAtIndexPath:indexPath])
+            {
+                // Ensure that from index is nil. This means that there is no move going on.
+                self.layoutMoveModifier.fromIndexPath = nil;
+
+                // Note that the gestureRecognizer is still not cancelled or failed, it will continue until the user ends the long press.
+                // If the gesture is cancelled, for example by setting
+                // gestureRecognizer.enabled = NO; gestureRecognizer.enabled = YES;  (http://stackoverflow.com/questions/6593772/how-to-cancel-reset-an-uigesturerecognizer)
+                // or returning NO in gestureRecognizerShouldBegin
+                // then other gestures will take over. For example the longressed item gets a didSelect delegate call.
+
                 return;
             }
+
             // Create mock cell to drag around
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
             cell.highlighted = NO;
@@ -369,19 +382,24 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
             // Start warping
             lastIndexPath = indexPath;
-            self.layoutHelper.fromIndexPath = indexPath;
-            self.layoutHelper.hideIndexPath = indexPath;
-            self.layoutHelper.toIndexPath = indexPath;
+            self.layoutMoveModifier.fromIndexPath = indexPath;
+            self.layoutMoveModifier.hideIndexPath = indexPath;
+            self.layoutMoveModifier.toIndexPath = indexPath;
             [self.collectionView.collectionViewLayout invalidateLayout];
-        } break;
+
+            break;
+        }
+
         case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled: {
-            if(self.layoutHelper.fromIndexPath == nil) {
+        case UIGestureRecognizerStateCancelled:
+        {
+            if(self.layoutMoveModifier.fromIndexPath == nil) {
                 return;
             }
+
             // Need these for later, but need to nil out layoutHelper's references sooner
-            NSIndexPath *fromIndexPath = self.layoutHelper.fromIndexPath;
-            NSIndexPath *toIndexPath = self.layoutHelper.toIndexPath;
+            NSIndexPath *fromIndexPath = self.layoutMoveModifier.fromIndexPath;
+            NSIndexPath *toIndexPath = self.layoutMoveModifier.toIndexPath;
             // Tell the data source to move the item
             id<KMYDraggableCollectionViewDataSource> dataSource = (id<KMYDraggableCollectionViewDataSource>)self.collectionView.dataSource;
             [dataSource collectionView:self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
@@ -389,8 +407,8 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             // Move the item
             [self.collectionView performBatchUpdates:^{
                 [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
-                self.layoutHelper.fromIndexPath = nil;
-                self.layoutHelper.toIndexPath = nil;
+                self.layoutMoveModifier.fromIndexPath = nil;
+                self.layoutMoveModifier.toIndexPath = nil;
             } completion:^(BOOL finished) {
                 if (finished) {
                     if ([dataSource respondsToSelector:@selector(collectionView:didMoveItemAtIndexPath:toIndexPath:)]) {
@@ -400,7 +418,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             }];
 
             // Switch mock for cell
-            UICollectionViewLayoutAttributes *layoutAttributes = [self.collectionView layoutAttributesForItemAtIndexPath:self.layoutHelper.hideIndexPath];
+            UICollectionViewLayoutAttributes *layoutAttributes = [self.collectionView layoutAttributesForItemAtIndexPath:self.layoutMoveModifier.hideIndexPath];
             [UIView
              animateWithDuration:0.3
              animations:^{
@@ -410,21 +428,25 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
              completion:^(BOOL finished) {
                  [_mockCell removeFromSuperview];
                  _mockCell = nil;
-                 self.layoutHelper.hideIndexPath = nil;
+                 self.layoutMoveModifier.hideIndexPath = nil;
                  [self.collectionView.collectionViewLayout invalidateLayout];
              }];
 
             // Reset
             [self invalidatesScrollTimer];
             lastIndexPath = nil;
-        } break;
+
+            break;
+        }
+
         default: break;
     }
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)sender
 {
-    if(sender.state == UIGestureRecognizerStateChanged) {
+    if(sender.state == UIGestureRecognizerStateChanged)
+    {
         // Move mock to match finger
         fingerTranslation = [sender translationInView:self.collectionView];
         _mockCell.center = _CGPointAdd(mockCenter, fingerTranslation);
