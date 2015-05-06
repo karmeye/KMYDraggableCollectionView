@@ -5,6 +5,10 @@ Fork from [lukescott/DraggableCollectionView](https://github.com/lukescott/Dragg
 
 ## Setup
 
+Use `KMYDraggableCollectionViewFlowLayout` for the layout. 
+
+Keep a strong reference to a coordinator.
+
 ```objc
 @property (nonatomic, strong) KMYCollectionViewDraggingCoordinator *draggingCoordinator;
 ```
