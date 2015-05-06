@@ -19,7 +19,11 @@
     return self;
 }
 
-- (NSArray *)modifiedLayoutAttributesForElements:(NSArray *)elements
+- (void)prepareModifiedLayout
+{
+}
+
+- (NSArray *)modifiedLayoutAttributesForElements:(NSArray *)elements inRect:(CGRect)rect
 {
     NSParameterAssert(self.collectionViewLayout && self.collectionViewLayout.collectionView);
 
@@ -94,4 +98,47 @@
     return elements;
 }
 
+- (UICollectionViewLayoutAttributes *)modifiedLayoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind atIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

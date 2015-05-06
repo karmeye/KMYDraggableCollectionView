@@ -14,7 +14,7 @@
     layoutAttributes = layoutAttributes ?: @[];
 
     for (id<KMYCollectionViewLayoutModifier> modifier in layoutModifiers) {
-        layoutAttributes = [modifier modifiedLayoutAttributesForElements:layoutAttributes];
+        layoutAttributes = [modifier modifiedLayoutAttributesForElements:layoutAttributes inRect:rect];
     }
 
     return layoutAttributes;

@@ -9,7 +9,8 @@
 typedef NS_ENUM(NSInteger, KMYCollectionViewLayoutModifierType)
 {
     KMYCollectionViewLayoutModifierTypeUndefined,
-    KMYCollectionViewLayoutModifierTypeMove
+    KMYCollectionViewLayoutModifierTypeMove,
+    KMYCollectionViewLayoutModifierTypeDecoration
 };
 
 @protocol KMYCollectionViewLayoutModifying <NSObject>
@@ -21,6 +22,16 @@ typedef NS_ENUM(NSInteger, KMYCollectionViewLayoutModifierType)
 
 @protocol KMYCollectionViewLayoutModifier <NSObject>
 
-- (NSArray *)modifiedLayoutAttributesForElements:(NSArray *)elements;
+//@optional
+
+/// Called from within @c prepareLayout:
+- (void)prepareModifiedLayout;
+
+/// Called from within @c layoutAttributesForElementsInRect:
+- (NSArray *)modifiedLayoutAttributesForElements:(NSArray *)elements inRect:(CGRect)rect;
+
+/// Called from within @c layoutAttributesForDecorationViewOfKind:atIndexPath:
+/// @return Nil if not applicable
+- (UICollectionViewLayoutAttributes *)modifiedLayoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind atIndexPath:(NSIndexPath *)indexPath;
 
 @end
