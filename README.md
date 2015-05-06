@@ -6,6 +6,7 @@ Fork from [lukescott/DraggableCollectionView](https://github.com/lukescott/Dragg
 ## Setup
 
 Use `KMYDraggableCollectionViewFlowLayout` for the layout. 
+For custom layouts, conform to `KMYCollectionViewLayoutModifying` protocol. See the _CircleLayout_ example. 
 
 Keep a strong reference to a coordinator.
 
