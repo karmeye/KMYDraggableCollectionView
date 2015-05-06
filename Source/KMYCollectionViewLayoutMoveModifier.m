@@ -33,31 +33,40 @@
     NSIndexPath *hideIndexPath          = self.hideIndexPath;
     NSIndexPath *indexPathToRemove;
 
-    if (toIndexPath == nil) {
+    if (toIndexPath == nil)
+    {
         if (hideIndexPath == nil) {
             return elements;
         }
-        for (UICollectionViewLayoutAttributes *layoutAttributes in elements) {
+
+        for (UICollectionViewLayoutAttributes *layoutAttributes in elements)
+        {
             if(layoutAttributes.representedElementCategory != UICollectionElementCategoryCell) {
                 continue;
             }
+
             if ([layoutAttributes.indexPath isEqual:hideIndexPath]) {
                 layoutAttributes.hidden = YES;
             }
         }
+
         return elements;
     }
 
-    if (fromIndexPath.section != toIndexPath.section) {
+    if (fromIndexPath.section != toIndexPath.section)
+    {
         indexPathToRemove = [NSIndexPath indexPathForItem:[collectionView numberOfItemsInSection:fromIndexPath.section] - 1
                                                 inSection:fromIndexPath.section];
     }
 
-    for (UICollectionViewLayoutAttributes *layoutAttributes in elements) {
+    for (UICollectionViewLayoutAttributes *layoutAttributes in elements)
+    {
         if(layoutAttributes.representedElementCategory != UICollectionElementCategoryCell) {
             continue;
         }
-        if([layoutAttributes.indexPath isEqual:indexPathToRemove]) {
+
+        if([layoutAttributes.indexPath isEqual:indexPathToRemove])
+        {
             // Remove item in source section and insert item in target section
             layoutAttributes.indexPath = [NSIndexPath indexPathForItem:[collectionView numberOfItemsInSection:toIndexPath.section]
                                                              inSection:toIndexPath.section];
@@ -65,15 +74,19 @@
                 layoutAttributes.center = [self.collectionViewLayout layoutAttributesForItemAtIndexPath:layoutAttributes.indexPath].center;
             }
         }
+
         NSIndexPath *indexPath = layoutAttributes.indexPath;
         if ([indexPath isEqual:hideIndexPath]) {
             layoutAttributes.hidden = YES;
         }
-        if([indexPath isEqual:toIndexPath]) {
+
+        if([indexPath isEqual:toIndexPath])
+        {
             // Item's new location
             layoutAttributes.indexPath = fromIndexPath;
         }
-        else if(fromIndexPath.section != toIndexPath.section) {
+        else if(fromIndexPath.section != toIndexPath.section)
+        {
             if(indexPath.section == fromIndexPath.section && indexPath.item >= fromIndexPath.item) {
                 // Change indexes in source section
                 layoutAttributes.indexPath = [NSIndexPath indexPathForItem:indexPath.item + 1 inSection:indexPath.section];
@@ -83,7 +96,8 @@
                 layoutAttributes.indexPath = [NSIndexPath indexPathForItem:indexPath.item - 1 inSection:indexPath.section];
             }
         }
-        else if(indexPath.section == fromIndexPath.section) {
+        else if(indexPath.section == fromIndexPath.section)
+        {
             if(indexPath.item <= fromIndexPath.item && indexPath.item > toIndexPath.item) {
                 // Item moved back
                 layoutAttributes.indexPath = [NSIndexPath indexPathForItem:indexPath.item - 1 inSection:indexPath.section];
