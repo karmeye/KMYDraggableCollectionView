@@ -78,6 +78,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
         _scrollingSpeed         = 300.f;
 
         _longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+        _longPressGestureRecognizer.delegate = self;
         [_collectionView addGestureRecognizer:_longPressGestureRecognizer];
 
         _panPressGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
@@ -320,12 +321,12 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    if ([gestureRecognizer isEqual:_longPressGestureRecognizer]) {
-        return [otherGestureRecognizer isEqual:_panPressGestureRecognizer];
+    if (gestureRecognizer == _longPressGestureRecognizer) {
+        return otherGestureRecognizer == _panPressGestureRecognizer;
     }
 
-    if ([gestureRecognizer isEqual:_panPressGestureRecognizer]) {
-        return [otherGestureRecognizer isEqual:_longPressGestureRecognizer];
+    if (gestureRecognizer == _panPressGestureRecognizer) {
+        return otherGestureRecognizer == _longPressGestureRecognizer;
     }
 
     return NO;
