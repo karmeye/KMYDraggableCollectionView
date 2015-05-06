@@ -5,6 +5,10 @@ Fork from [lukescott/DraggableCollectionView](https://github.com/lukescott/Dragg
 
 ## Setup
 
+```objc
+#import <KMYDraggableCollectionView/KMYDraggableCollectionView.h>
+```
+
 Use `KMYDraggableCollectionViewFlowLayout` for the layout. 
 For custom layouts, conform to `KMYCollectionViewLayoutModifying` protocol. See the _CircleLayout_ example. 
 
