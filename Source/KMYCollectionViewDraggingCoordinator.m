@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 @interface KMYCollectionViewDraggingCoordinator () <UIGestureRecognizerDelegate>
 {
     NSIndexPath *lastIndexPath;
-    UIImageView *mockCell;
+    UIView      *_mockCell;
     CGPoint mockCenter;
     CGPoint fingerTranslation;
     CADisplayLink *timer;
@@ -106,14 +106,29 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     _longPressGestureRecognizer.enabled = _panPressGestureRecognizer.enabled = canWarp && self.enabled;
 }
 
-- (UIImage *)imageFromCell:(UICollectionViewCell *)cell
+- (UIView*)snapshotViewOfView:(UIView*)view
 {
-    // TODO: iOS7 new methd
-    UIGraphicsBeginImageContextWithOptions(cell.bounds.size, cell.isOpaque, 0.0f);
-    [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIView *replicantView;
+
+    // TODO: Support setting a subview as the snapshot
+
+#if 1
+
+    replicantView = [view snapshotViewAfterScreenUpdates:YES];
+
+#else
+
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return image;
+
+    replicantView = [[UIImageView alloc] initWithImage:image];
+
+#endif
+
+    replicantView.frame = view.frame;
+    return replicantView;
 }
 
 - (NSIndexPath *)indexPathForItemClosestToPoint:(CGPoint)point
@@ -261,11 +276,11 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     }
 
     mockCenter  = _CGPointAdd(mockCenter, translation);
-    mockCell.center = _CGPointAdd(mockCenter, fingerTranslation);
+    _mockCell.center = _CGPointAdd(mockCenter, fingerTranslation);
     self.collectionView.contentOffset = _CGPointAdd(contentOffset, translation);
 
     // Warp items while scrolling
-    NSIndexPath *indexPath = [self indexPathForItemClosestToPoint:mockCell.center];
+    NSIndexPath *indexPath = [self indexPathForItemClosestToPoint:_mockCell.center];
     [self warpToIndexPath:indexPath];
 }
 
@@ -330,15 +345,14 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             // Create mock cell to drag around
             UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
             cell.highlighted = NO;
-            [mockCell removeFromSuperview];
-            mockCell = [[UIImageView alloc] initWithFrame:cell.frame];
-            mockCell.image = [self imageFromCell:cell];
-            mockCenter = mockCell.center;
-            [self.collectionView addSubview:mockCell];
+            [_mockCell removeFromSuperview];
+            _mockCell = [self snapshotViewOfView:cell];
+            mockCenter = _mockCell.center;
+            [self.collectionView addSubview:_mockCell];
             [UIView
              animateWithDuration:0.3
              animations:^{
-                 mockCell.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
+                 _mockCell.transform = CGAffineTransformMakeScale(1.1f, 1.1f);
              }
              completion:nil];
 
@@ -379,12 +393,12 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             [UIView
              animateWithDuration:0.3
              animations:^{
-                 mockCell.center = layoutAttributes.center;
-                 mockCell.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                 _mockCell.center = layoutAttributes.center;
+                 _mockCell.transform = CGAffineTransformMakeScale(1.f, 1.f);
              }
              completion:^(BOOL finished) {
-                 [mockCell removeFromSuperview];
-                 mockCell = nil;
+                 [_mockCell removeFromSuperview];
+                 _mockCell = nil;
                  self.layoutHelper.hideIndexPath = nil;
                  [self.collectionView.collectionViewLayout invalidateLayout];
              }];
@@ -402,17 +416,17 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     if(sender.state == UIGestureRecognizerStateChanged) {
         // Move mock to match finger
         fingerTranslation = [sender translationInView:self.collectionView];
-        mockCell.center = _CGPointAdd(mockCenter, fingerTranslation);
+        _mockCell.center = _CGPointAdd(mockCenter, fingerTranslation);
 
         // Scroll when necessary
         if (canScroll) {
             UICollectionViewFlowLayout *scrollLayout = (UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout;
             if([scrollLayout scrollDirection] == UICollectionViewScrollDirectionVertical) {
-                if (mockCell.center.y < (CGRectGetMinY(self.collectionView.bounds) + self.scrollingEdgeInsets.top)) {
+                if (_mockCell.center.y < (CGRectGetMinY(self.collectionView.bounds) + self.scrollingEdgeInsets.top)) {
                     [self setupScrollTimerInDirection:_ScrollingDirectionUp];
                 }
                 else {
-                    if (mockCell.center.y > (CGRectGetMaxY(self.collectionView.bounds) - self.scrollingEdgeInsets.bottom)) {
+                    if (_mockCell.center.y > (CGRectGetMaxY(self.collectionView.bounds) - self.scrollingEdgeInsets.bottom)) {
                         [self setupScrollTimerInDirection:_ScrollingDirectionDown];
                     }
                     else {
@@ -421,10 +435,10 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
                 }
             }
             else {
-                if (mockCell.center.x < (CGRectGetMinX(self.collectionView.bounds) + self.scrollingEdgeInsets.left)) {
+                if (_mockCell.center.x < (CGRectGetMinX(self.collectionView.bounds) + self.scrollingEdgeInsets.left)) {
                     [self setupScrollTimerInDirection:_ScrollingDirectionLeft];
                 } else {
-                    if (mockCell.center.x > (CGRectGetMaxX(self.collectionView.bounds) - self.scrollingEdgeInsets.right)) {
+                    if (_mockCell.center.x > (CGRectGetMaxX(self.collectionView.bounds) - self.scrollingEdgeInsets.right)) {
                         [self setupScrollTimerInDirection:_ScrollingDirectionRight];
                     } else {
                         [self invalidatesScrollTimer];
