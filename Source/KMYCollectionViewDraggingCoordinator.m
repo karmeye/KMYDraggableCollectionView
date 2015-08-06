@@ -427,35 +427,52 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             NSIndexPath *toIndexPath = self.layoutMoveModifier.toIndexPath;
             // Tell the data source to move the item
             id<KMYDraggableCollectionViewDataSource> dataSource = (id<KMYDraggableCollectionViewDataSource>)self.collectionView.dataSource;
-            [dataSource collectionView:self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
 
-            // Move the item
-            [self.collectionView performBatchUpdates:^{
-                [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
-                self.layoutMoveModifier.fromIndexPath = nil;
-                self.layoutMoveModifier.toIndexPath = nil;
-            } completion:^(BOOL finished) {
-                if (finished) {
-                    if ([dataSource respondsToSelector:@selector(collectionView:didMoveItemAtIndexPath:toIndexPath:)]) {
-                        [dataSource collectionView:self.collectionView didMoveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
-                    }
-                }
+            // Add async error handling
+            [dataSource
+             collectionView:self.collectionView
+             moveItemAtIndexPath:fromIndexPath
+             toIndexPath:toIndexPath
+             completion:^(BOOL success) {
+
+                 if (success)
+                 {
+                     // Move the item
+                     [self.collectionView performBatchUpdates:^{
+                         [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+                         self.layoutMoveModifier.fromIndexPath = nil;
+                         self.layoutMoveModifier.toIndexPath = nil;
+                     } completion:^(BOOL finished) {
+                         if (finished) {
+                             if ([dataSource respondsToSelector:@selector(collectionView:didMoveItemAtIndexPath:toIndexPath:)]) {
+                                 [dataSource collectionView:self.collectionView didMoveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+                             }
+                         }
+                     }];
+                 }
+
+
+                // Switch mock for cell
+                UICollectionViewLayoutAttributes *layoutAttributes = [self.collectionView layoutAttributesForItemAtIndexPath:self.layoutMoveModifier.hideIndexPath];
+                [UIView
+                 animateWithDuration:0.3
+                 animations:^{
+                     _mockCell.center = layoutAttributes.center;
+                     _mockCell.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                 }
+                 completion:^(BOOL finished) {
+                     [_mockCell removeFromSuperview];
+                     _mockCell = nil;
+                     self.layoutMoveModifier.hideIndexPath = nil;
+                     [self.collectionView.collectionViewLayout invalidateLayout];
+                 }];
+                
+                // Reset
+                [self invalidatesScrollTimer];
+                lastIndexPath = nil;
+
+
             }];
-
-            // Switch mock for cell
-            UICollectionViewLayoutAttributes *layoutAttributes = [self.collectionView layoutAttributesForItemAtIndexPath:self.layoutMoveModifier.hideIndexPath];
-            [UIView
-             animateWithDuration:0.3
-             animations:^{
-                 _mockCell.center = layoutAttributes.center;
-                 _mockCell.transform = CGAffineTransformMakeScale(1.f, 1.f);
-             }
-             completion:^(BOOL finished) {
-                 [_mockCell removeFromSuperview];
-                 _mockCell = nil;
-                 self.layoutMoveModifier.hideIndexPath = nil;
-                 [self.collectionView.collectionViewLayout invalidateLayout];
-             }];
 
             // Reset
             [self invalidatesScrollTimer];
