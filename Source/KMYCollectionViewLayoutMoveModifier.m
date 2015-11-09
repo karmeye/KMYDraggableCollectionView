@@ -6,14 +6,22 @@
 
 #import "KMYCollectionViewLayoutMoveModifier.h"
 
+@interface KMYCollectionViewLayoutMoveModifier ()
+
+@property (nonatomic, readonly)     BOOL    isSystemVersionAtLeast9;
+
+@end
+
 @implementation KMYCollectionViewLayoutMoveModifier
 
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout
 {
     self = [super init];
 
-    if (self) {
-        self.collectionViewLayout = collectionViewLayout;
+    if (self)
+    {
+        self.collectionViewLayout   = collectionViewLayout;
+        _isSystemVersionAtLeast9    = [UIDevice currentDevice].systemVersion.floatValue >= 9.0;
     }
 
     return self;
@@ -45,13 +53,15 @@
                 continue;
             }
 
-            if ([layoutAttributes.indexPath isEqual:hideIndexPath]) {
-                layoutAttributes.hidden = YES;
-            }
+            layoutAttributes.hidden = [layoutAttributes.indexPath isEqual:hideIndexPath];
         }
+
+        [self rearrangeIndexPathOfLayoutAttributesForElements:elements];
 
         return elements;
     }
+
+    [self rearrangeIndexPathOfLayoutAttributesForElements:elements];
 
     if (fromIndexPath.section != toIndexPath.section)
     {
@@ -76,9 +86,7 @@
         }
 
         NSIndexPath *indexPath = layoutAttributes.indexPath;
-        if ([indexPath isEqual:hideIndexPath]) {
-            layoutAttributes.hidden = YES;
-        }
+        layoutAttributes.hidden = [indexPath isEqual:hideIndexPath];
 
         if([indexPath isEqual:toIndexPath])
         {
@@ -115,6 +123,41 @@
 - (UICollectionViewLayoutAttributes *)modifiedLayoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind atIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
+}
+
+#pragma mark - Private -
+
+- (void)rearrangeIndexPathOfLayoutAttributesForElements:(NSArray *)elements
+{
+    if (self.isSystemVersionAtLeast9)
+    {
+        NSMutableArray *indexPathArray = [NSMutableArray array];
+
+        for (UICollectionViewLayoutAttributes *layoutAttributes in elements)
+        {
+            // Ignore headers and footers
+            if([layoutAttributes.representedElementKind isEqualToString:UICollectionElementKindSectionHeader] || [layoutAttributes.representedElementKind isEqualToString:UICollectionElementKindSectionFooter]) {
+                continue;
+            }
+
+            [indexPathArray addObject:layoutAttributes.indexPath];
+        }
+
+        NSArray *sortedArray = [indexPathArray sortedArrayUsingComparator:^(NSIndexPath *indexPath1, NSIndexPath *indexPath2) {
+
+            if (indexPath1.section < indexPath2.section)
+                return NSOrderedAscending;
+
+            if (indexPath1.row < indexPath2.row)
+                return NSOrderedAscending;
+
+            return (NSComparisonResult)NSOrderedDescending;
+        }];
+
+        for (NSInteger index = 0; index < sortedArray.count; ++index) {
+            ((UICollectionViewLayoutAttributes*)[elements objectAtIndex:index]).indexPath = (NSIndexPath *)[sortedArray objectAtIndex:index];
+        }
+    }
 }
 
 @end
