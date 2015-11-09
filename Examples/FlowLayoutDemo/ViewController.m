@@ -84,7 +84,7 @@
     return YES;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath completion:(void (^)(BOOL))completionHandler
 {
     NSMutableArray *data1 = [sections objectAtIndex:fromIndexPath.section];
     NSMutableArray *data2 = [sections objectAtIndex:toIndexPath.section];
@@ -92,6 +92,75 @@
     
     [data1 removeObjectAtIndex:fromIndexPath.item];
     [data2 insertObject:index atIndex:toIndexPath.item];
+
+    completionHandler(YES);
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

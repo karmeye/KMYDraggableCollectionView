@@ -63,11 +63,13 @@
     return YES;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath completion:(void (^)(BOOL))completionHandler
 {
     NSNumber *index = [data objectAtIndex:fromIndexPath.item];
     [data removeObjectAtIndex:fromIndexPath.item];
     [data insertObject:index atIndex:toIndexPath.item];
+
+    completionHandler(YES);
 }
 
 @end
