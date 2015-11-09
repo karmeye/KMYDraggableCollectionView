@@ -1,8 +1,6 @@
 KMYDraggableCollectionView
 =====================================
 
-Fork from [lukescott/DraggableCollectionView](https://github.com/lukescott/DraggableCollectionView) but now lives its own life.
-
 ## Setup
 
 ```objc
@@ -33,7 +31,6 @@ self.draggingCoordinator.scrollingSpeed         = 600;
 ## Compability
 
 iOS 7 and later.
-Examples tested on Xcode 6.3.
 
 ## License
 
