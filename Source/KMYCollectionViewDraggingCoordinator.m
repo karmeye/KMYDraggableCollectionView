@@ -189,7 +189,8 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     }
 
     // Are we closer to being the last cell in a different section?
-    NSInteger sections = [self.collectionView numberOfSections];
+    NSInteger const sections = [self.collectionView numberOfSections];
+
     for (NSInteger i = 0; i < sections; ++i) {
         if (i == self.layoutMoveModifier.fromIndexPath.section) {
             continue;
@@ -217,6 +218,11 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             closestDist = dist;
             indexPath = layoutAttr.indexPath;
         }
+    }
+
+    // Quick Fix for out of bounds exception caused if user drags cell further than the last item.
+    if (indexPath.section >= sections || indexPath.item >= [self.collectionView numberOfItemsInSection:indexPath.section]) {
+        indexPath = nil;
     }
 
     return indexPath;
